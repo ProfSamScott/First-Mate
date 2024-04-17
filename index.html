@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--<html xmlns:fb="http://ogp.me/ns/fb#">-->
+<head>
+<title>First Mate: A Battleship Assistant</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:title" content="First Mate: A Battleship Assistant" />
+<meta property="og:type" content="school" />
+<meta property="og:url"
+	content="http://www-acad.sheridanc.on.ca/staff/scottsam/BattleShip/" />
+<meta property="og:image"
+	content="http://www-acad.sheridanc.on.ca/staff/scottsam/BattleShip/images/First Mate.fw.png" />
+<meta property="og:site_name"
+	content="First Mate: A Battleship Assistant" />
+<!--<meta property="fb:app_id" content="117265228304" />-->
+<link rel="icon" 
+      type="image/png" 
+      href="images/First Mate.fw.png">
+
+<script type="text/javascript" src="js/firstMate.js"></script>
+<style type="text/css">
+td {
+	width: 10%;
+	height: 10%;
+	color: white;
+	margin: 0px;
+	padding: 2px;
+	border-radius: 10px;
+	color: white;
+}
+
+input.cell {
+	width: 100%;
+	height: 100%;
+	color: black;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 10px;
+	font-size: 20px;
+}
+
+#name {
+	font-size: 20pt;
+	width: 320px;
+	text-align: center;
+	border: none;
+	background-color: rgb(192, 192, 255);
+	color: gray;
+	position: relative;
+	top: -10px;
+	border: 1px solid rgb(64, 64, 255);
+	border-radius: 10px;
+}
+
+input.button {
+	font-size: 20px;
+	width: 250px;
+	background-color: lightgray;
+	border-radius: 10px;
+	margin-bottom: 5px;
+}
+
+input.image {
+	height: 40px;
+	width: 40px;
+}
+
+body {
+	text-align: center;
+	font-family: sans-serif
+}
+
+table {
+	margin: auto;
+	width: 500px;
+	height: 500px;
+	background-color: rgb(96, 96, 255);
+	border-radius: 10px;
+	padding: 0px;
+	margin-bottom: 5px;
+}
+
+#heading {
+	width: 490px;
+	height: 120px;
+	background-color: rgb(192, 192, 255);
+	border-radius: 10px;
+	margin: auto;
+	margin-bottom: 5px;
+	border: 1px solid rgb(64, 64, 255);
+	text-align: left;
+	padding: 5px;
+	background-color: rgb(192, 192, 255);
+}
+
+#screen {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 10000px;
+	display: none;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 40px;
+	font-family: sans-serif;
+	color: white;
+}
+
+h1,p {
+	padding-top: 0px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+	padding: 0px;
+}
+
+h1 {
+	font-size: 50px;
+}
+
+#helpdiv {
+	text-align: left;
+	width: 500px;
+	margin: auto;
+	padding: 0px;
+}
+
+#help {
+	padding: 0px;
+	display: none;
+	margin: 0px;
+	text-align: left;
+}
+
+#helpbutton {
+	text-align: center
+}
+
+#logo {
+	float: left;
+}
+
+.tag {
+	font-size: 20px;
+}
+
+@media only screen and (max-width: 499px) {
+	#helpdiv {
+		width: 320px;
+	}
+	#heading {
+		width: 310px;
+		height: 80px;
+	}
+	#name {
+		width: 140px;
+		font-size: 18px;
+	}
+	input.cell,p,input.button,a,li {
+		font-size: 12px;
+	}
+	input.button {
+		width: 160px;
+	}
+	table {
+		height: 320px;
+		width: 320px;
+	}
+	h1 {
+		font-size: 30px;
+	}
+	h2,#sam {
+		font-size: 18px;
+	}
+	.tag {
+		font-size: 12px;
+	}
+	input.image {
+		height: 30px;
+		width: 30px;
+	}
+	#logo {
+		height: 75px;
+		width: 60px;
+	}
+}
+</style>
+</head>
+<body>
+	<!--<div id="fb-root"></div>
+	<script>
+		window.fbAsyncInit = function() {
+			// init the FB JS SDK
+			FB
+					.init({
+						appId : '117265228304', // App ID from the App Dashboard
+						channelUrl : '//www-acad.sheridancollege.ca/staff/scottsam/channel.html', // Channel File for x-domain communication
+						status : true, // check the login status upon init?
+						cookie : true, // set sessions cookies to allow your server to access the session?
+						xfbml : true
+					// parse XFBML tags on this page?
+					});
+
+			// Additional initialization code such as adding Event Listeners goes here
+
+		};
+
+		// Load the SDK's source Asynchronously
+		// Note that the debug version is being actively developed and might 
+		// contain some type checks that are overly strict. 
+		// Please report such bugs using the bugs tool.
+		(function(d, debug) {
+			var js, id = 'facebook-jssdk', ref = d
+					.getElementsByTagName('script')[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement('script');
+			js.id = id;
+			js.async = true;
+			js.src = "//connect.facebook.net/en_US/all"
+					+ (debug ? "/debug" : "") + ".js";
+			ref.parentNode.insertBefore(js, ref);
+		}(document, /*debug*/false));
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=3068250318";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>-->
+	<a name="top"></a>
+	<div id="heading">
+		<img id="logo" src="images/First Mate.fw.png">
+		<h1 class="title">F i r s t&nbsp;&nbsp;M a t e</h1>
+		<p class="tag">
+			Your <a
+				href="https://play.google.com/store/apps/details?id=com.tequilamobile.warshipslive&hl=en"
+				target="battlefriends">BattleFriends at Sea</a> Assistant
+		</p>
+	</div>
+	<table id="mainTable">
+	</table>
+	<input class="button" id="compute" type="button"
+		title="Compute Best Shot" value="Compute">
+	<input class="button" id="clear" type="button" title="Clear the Board"
+		value="Clear">
+	<br>
+	<input class="image" id="left" type="image" title="previous opponent"
+		src="images/tango_left_arrow_blue.png">
+	<input class="image" id="new" type="image" title="new opponent"
+		src="images/New.png">
+	<input class="image" id="delete" type="image" title="delete opponent"
+		src="images/x_button_blue.png">
+	<input id="name" type="text" value="" title="Current Opponent's Name">
+	<input class="image" id="right" type="image" title="next opponent"
+		src="images/tango_right_arrow_blue.png">
+
+	<div id="debug"></div>
+
+
+	<div id="footer">
+<!--		<div id="countbox"
+			style="display: inline; background-color: rgb(192, 192, 255); padding: 2px; border-radius: 5px; margin: 2px; position: relative; top: -9px; font-family: monospace; font-size: 12px;">
+			<b><span id="count"> </span></b>
+		</div>
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id))
+					return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		<div class="fb-like"
+			data-href="http://www-acad.sheridanc.on.ca/staff/scottsam/BattleShip"
+			data-send="true" data-layout="button_count" data-width="450"
+			data-show-faces="false"
+			style="display: inline; position: relative; top: -3px"></div>-->
+		<a id="helpbutton"
+			style="display: inline; color: black; background-color: rgb(192, 192, 255); position: relative; top: -9px; border-radius: 5px; font-family: monospace; margin: 2px; font-size: 12px; text-decoration: none; font-weight: bold; padding: 2px;"
+			href="#help">Show Help</a>
+	</div>
+
+	<div id="helpdiv">
+
+<!--		<div id="comments">
+			<fb:comments
+				href="http://www-acad.sheridancollege.ca/staff/scottsam/BattleShip/"
+				width="470" num_posts="50"></fb:comments>
+		</div>-->
+		<a name="help"></a>
+		<div id="help">
+			<h2>What is This?</h2>
+			<p>
+				This app uses <a
+					href="http://en.wikipedia.org/wiki/Monte_Carlo_method"
+					target="wiki">Monte Carlo Simulation</a> to help you predict where
+				your opponents' ships will be when you play a BattleShip game with
+				the same rules as <a
+					href="https://play.google.com/store/apps/details?id=com.tequilamobile.warshipslive&hl=en"
+					target="battlefriends">BattleFriends at Sea</a>.
+			</p>
+			<p>You can load this up on your tablet while you play and flip
+				back and forth to get predictions. Even if you restart your browser,
+				the assistant will remember the games you had in process.</p>
+			<p>
+				The assistant assumes two ships each of lengths 4, 3, and 2, and it
+				assumes that your opponents are not allowed to place their ships
+				adjacent to one another. Because of the use of <a
+					href="http://en.wikipedia.org/wiki/Monte_Carlo_method"
+					target="wiki">Monte Carlo Simulation</a>, the assistant will work
+				best against players who place their ships randomly.
+			</p>
+
+			<h2>What Do I Do?</h2>
+			<ul>
+				<li>Tap the "new" icon to create a new opponent.</li>
+				<li>Tap locations on the board to enter hits (pink *), misses
+					(blue M), and ships you have found (orange S)</li>
+				<li>Press the compute button and the assistant will show you
+					(in red) where you should fire your next shot</li>
+				<li>The numbers that appear tell you the percentage chance that
+					there is a ship in that spot</li>
+				<li>IMPORTANT: Once you have finished killing a ship, you must
+					change the * symbols to S symbols</li>
+			</ul>
+			<h2>What Else Do I Do?</h2>
+			<ul>
+				<li>Use the arrows to move between saved opponents</li>
+				<li>Use the delete button to remove an opponent</li>
+				<li>Use the clear button to keep the opponent but clear the
+					board for a new game</li>
+			</ul>
+			<a id="helpbutton2" href="#top">hide help</a>
+
+		</div>
+	</div>
+	<div id="screen" style="z-index:10000;">
+		<br> <br> <br> <br> <br> <br> <br>Thinking
+	</div>
+</body>
+</html>
